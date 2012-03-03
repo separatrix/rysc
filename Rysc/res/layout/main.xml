@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
-</LinearLayout>
+    android:layout_height="fill_parent" >
+    
+    <ImageView android:id="@+id/Logo" 
+    	android:src="@drawable/icon" 
+    	android:layout_height="275dp" 
+    	android:layout_width="wrap_content" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_centerHorizontal="true"/>
+    
+    <Button android:id="@+id/btnNewGame" 
+     	android:text="New Game" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp" 
+     	android:layout_below="@+id/Logo" 
+     	android:layout_alignParentLeft="true"/>
+     	
+    <Button android:id="@+id/btnRules" 
+     	android:text="Rules" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp" 
+     	android:layout_below="@+id/Logo" 
+     	android:layout_alignParentRight="true"
+     	android:onClick="ViewRules"/>
+     	
+    <Button android:id="@+id/btnNewInternetGame" 
+     	android:text="New Internet Game" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp" 
+     	android:layout_below="@+id/btnNewGame"
+     	android:layout_alignParentLeft="true"/>
+     	
+     <Button android:id="@+id/btnControls" 
+     	android:text="Controls" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp"
+     	android:layout_below="@+id/btnRules"
+     	android:layout_alignParentRight="true"/>
+     	
+ 
+</RelativeLayout>

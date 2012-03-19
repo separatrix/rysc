@@ -6,6 +6,7 @@ public class Game {
 	private ArrayList<Continent> continents = new ArrayList(); //Heimsálfur leiksins
 	private ArrayList<Country> countries = new ArrayList(); //Lönd leiksins
 	private ArrayList<Player> players = new ArrayList(); //Leikmenn leiksins
+	private int turn_number = 0;
 	public Game() {}
 	public void addContinent(Continent ce) {
 		continents.add(ce);
@@ -22,6 +23,12 @@ public class Game {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}	
+	public void setTurnNumber(int t) {
+		turn_number = t;
+	}
+	public int getTurnNumber() {
+		return turn_number;
+	}
 	public int getReinforcements(Player a) {
 		int ownedcountries = a.getCountries().size();
 		int reinforcements;
@@ -67,6 +74,8 @@ public class Game {
 		}
 		if (b.getArmies() == 0) {
 			b.setOwner(a.getOwner());
+			a.getOwner().addCountry(b);
+			//System.out.println(b.getOwner().getName());
 			b.setArmies(a.getArmies()-1); //Allir herirnir færast yfir, til einföldunar.
 			a.setArmies(1);
 		}

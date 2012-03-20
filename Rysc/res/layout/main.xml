@@ -4,7 +4,7 @@
     android:layout_height="fill_parent" >
     
     <ImageView android:id="@+id/Logo" 
-    	android:src="@drawable/icon" 
+    	android:src="@drawable/rysclogo" 
     	android:layout_height="275dp" 
     	android:layout_width="wrap_content" 
     	android:layout_alignParentTop="true" 
@@ -54,12 +54,13 @@
      	android:clickable="false"
      	android:visibility="gone"/>
      	
-     <Button android:id="@+id/btnControls" 
-     	android:text="Controls" 
+     <Button android:id="@+id/btnTextBased" 
+     	android:text="Text Game" 
      	android:layout_height="wrap_content" 
      	android:layout_width="150dp"
      	android:layout_below="@+id/btnRules"
-     	android:layout_alignParentRight="true"/>
+     	android:layout_alignParentRight="true"
+     	android:onClick="TextGame"/>
      	
  
 </RelativeLayout>

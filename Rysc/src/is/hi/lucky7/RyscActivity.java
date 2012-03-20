@@ -41,4 +41,10 @@ public class RyscActivity extends Activity {
        			UdpReceiveActivity.class);
        	startActivity(UdpReceive);
     } 
+    
+    public void TextGame(View view) {
+       	Intent Play = new Intent(getApplicationContext(),
+       			Play.class);
+       	startActivity(Play);
+    } 
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -154,6 +155,10 @@ public class StartGameActivity extends Activity {
 	         btnListenForPlayers.setClickable(true);
 	         
 	         UdpHelper.send(result.get(0), UDP_SERVER_PORT, "start");
+	         
+	        	Intent Play = new Intent(getApplicationContext(),
+	           			Play.class);
+	           	startActivity(Play);
 	     }
 	     
 	     protected void onPreExecute()

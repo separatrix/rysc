@@ -2,9 +2,9 @@ package is.hi.lucky7;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,7 +52,6 @@ public class JoinGameActivity extends Activity {
 	
 	private class joinChecker extends AsyncTask<Void, String, Void>
 	{
-		private static final int UDP_SERVER_PORT = 11111;
 		private static final int MAX_UDP_DATAGRAM_LEN = 1500;
 
 		protected Void doInBackground(Void... arg0)
@@ -89,7 +88,11 @@ public class JoinGameActivity extends Activity {
 
 	     protected void onPostExecute(Void result) 
 	     {
-	    	 // TODO: Gogo start game ?
+	    	 // Launch Text Based Game activity
+	    	 // TODO: Change this to the graphic version of the game when it's ready.
+	        	Intent Play = new Intent(getApplicationContext(),
+	           			Play.class);
+	           	startActivity(Play);
 	     }
 	     
 	     protected void onPreExecute()

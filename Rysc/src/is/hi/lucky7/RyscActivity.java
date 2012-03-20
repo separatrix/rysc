@@ -12,6 +12,7 @@ public class RyscActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+    
     public void ViewRules(View view) {
     	Intent rulesgui = new Intent(getApplicationContext(),
     			rules.class);

@@ -1,10 +1,5 @@
 package is.hi.lucky7;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;

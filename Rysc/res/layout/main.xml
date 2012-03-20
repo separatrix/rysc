@@ -11,11 +11,12 @@
     	android:layout_centerHorizontal="true"/>
     
     <Button android:id="@+id/btnNewGame" 
-     	android:text="New Game" 
+     	android:text="Start Game" 
      	android:layout_height="wrap_content" 
      	android:layout_width="150dp" 
      	android:layout_below="@+id/Logo" 
-     	android:layout_alignParentLeft="true"/>
+     	android:layout_alignParentLeft="true"
+     	android:onClick="StartGame"/>
      	
     <Button android:id="@+id/btnRules" 
      	android:text="Rules" 
@@ -26,11 +27,32 @@
      	android:onClick="ViewRules"/>
      	
     <Button android:id="@+id/btnNewInternetGame" 
-     	android:text="New Internet Game" 
+     	android:text="Join Game" 
      	android:layout_height="wrap_content" 
      	android:layout_width="150dp" 
      	android:layout_below="@+id/btnNewGame"
-     	android:layout_alignParentLeft="true"/>
+     	android:layout_alignParentLeft="true"
+     	android:onClick="JoinGame"/>
+     	
+    <Button android:id="@+id/btnUdpSend" 
+     	android:text="UDP Send" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp" 
+     	android:layout_below="@+id/btnControls"
+     	android:layout_alignParentRight="true"
+     	android:onClick="UdpSend"
+     	android:clickable="false"
+     	android:visibility="gone"/>
+    
+    <Button android:id="@+id/btnUdpReceive" 
+     	android:text="UDP Receive" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp" 
+     	android:layout_below="@+id/btnNewInternetGame"
+     	android:layout_alignParentLeft="true"
+     	android:onClick="UdpReceive"
+     	android:clickable="false"
+     	android:visibility="gone"/>
      	
      <Button android:id="@+id/btnControls" 
      	android:text="Controls" 

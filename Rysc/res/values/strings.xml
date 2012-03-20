@@ -2,4 +2,9 @@
 <resources>
     <string name="hello">Hello World, RyscActivity!</string>
     <string name="app_name">Rysc</string>
+    <string name="player_prompt">Number of Players</string>
+    <string-array name="number_of_players">
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

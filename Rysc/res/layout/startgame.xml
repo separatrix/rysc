@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TextView 
+    	android:text="My IP address: " 
+    	android:id="@+id/twIP" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    <TextView 
+    	android:text="Number of Players: " 
+    	android:id="@+id/twPlayerNum" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    <Spinner 
+    	android:layout_width="match_parent" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/spPlayerNum"
+    	android:entries="@array/number_of_players"
+        android:prompt="@string/player_prompt">
+    </Spinner>
+    <TextView 
+    	android:text="Input IP below for emulator/phone test." 
+    	android:id="@+id/twInputIP" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    <EditText 
+    	android:layout_width="match_parent" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/etIPinput">
+    	</EditText>
+    <Button 
+    	android:text="Listen for players" 
+    	android:id="@+id/btnListenForPlayers" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:onClick="ListenForPlayers">
+    </Button>
+    <TextView
+    	android:text="Connected IP Addresses: " 
+    	android:id="@+id/twIPlistStatic" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+        <TextView
+    	android:text="" 
+    	android:id="@+id/twIPlist" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    
+    
+</LinearLayout>

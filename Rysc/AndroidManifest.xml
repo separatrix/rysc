@@ -4,7 +4,9 @@
       android:versionCode="1"
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8" />
-
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".RyscActivity"
                   android:label="@string/app_name">
@@ -13,6 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".UdpSendActivity"></activity>
+        <activity android:name=".UdpReceiveActivity"></activity>
+        <activity android:name=".rules"></activity>
+        <activity android:name=".StartGameActivity"></activity>
+        <activity android:name=".JoinGameActivity"></activity>
     </application>
 </manifest>

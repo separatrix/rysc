@@ -17,4 +17,28 @@ public class RyscActivity extends Activity {
     			rules.class);
     	startActivity(rulesgui);
     } 
+    
+    public void StartGame(View view) {
+    	Intent StartGame = new Intent(getApplicationContext(),
+    			StartGameActivity.class);
+    	startActivity(StartGame);
+    } 
+    
+    public void JoinGame(View view) {
+    	Intent JoinGame = new Intent(getApplicationContext(),
+    			JoinGameActivity.class);
+    	startActivity(JoinGame);
+    } 
+    
+    public void UdpSend(View view) {
+    	Intent UdpSend = new Intent(getApplicationContext(),
+    			UdpSendActivity.class);
+    	startActivity(UdpSend);
+    }
+        
+    public void UdpReceive(View view) {
+       	Intent UdpReceive = new Intent(getApplicationContext(),
+       			UdpReceiveActivity.class);
+       	startActivity(UdpReceive);
+    } 
 }

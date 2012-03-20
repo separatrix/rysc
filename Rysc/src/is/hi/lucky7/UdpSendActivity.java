@@ -10,9 +10,12 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+// TODO: Remove this test class when finished.
 
 public class UdpSendActivity extends Activity {
     /** Called when the activity is first created. */
@@ -31,11 +34,24 @@ public class UdpSendActivity extends Activity {
     	
     	String udpMsg = Integer.toString(rand.nextInt());
     	EditText etSend = (EditText) findViewById(R.id.etSend);
+		String address = etSend.getText().toString();
+		InetAddress serverAddr;
+		try {
+			serverAddr = InetAddress.getByName(address);
+			UdpHelper.connect(UDP_SERVER_PORT);
+			UdpHelper.send(serverAddr, UDP_SERVER_PORT, udpMsg);
+		} catch (UnknownHostException e) {
+			Log.i("Not a valid address","Not a valid address");
+			e.printStackTrace();
+		}
+
     	
 		Toast.makeText( getApplicationContext(),"SendUdp",Toast.LENGTH_SHORT).show();
-
+		
+		/*
     	DatagramSocket ds = null;
     	try {
+    		Toast.makeText( getApplicationContext(),"TRY",Toast.LENGTH_SHORT).show();
     		String address = etSend.getText().toString();
 			ds = new DatagramSocket();
 			InetAddress serverAddr = InetAddress.getByName(address);
@@ -58,6 +74,6 @@ public class UdpSendActivity extends Activity {
 			if (ds != null) {
 				ds.close();
 			}
-		}
+		}*/
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <EditText 
+    	android:id="@+id/etIpInput" 
+    	android:layout_width="match_parent" 
+    	android:layout_height="wrap_content">
+        <requestFocus></requestFocus>
+    </EditText>
+    <Button 
+    	android:text="Join Game" 
+    	android:id="@+id/btnSend" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:onClick="JoinGame">
+    </Button>
+    <TextView 
+    	android:text="Status: Idle" 
+    	android:id="@+id/twJoinStatus" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    
+</LinearLayout>

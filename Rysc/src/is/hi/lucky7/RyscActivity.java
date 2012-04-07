@@ -3,6 +3,7 @@ package is.hi.lucky7;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class RyscActivity extends Activity {
@@ -30,6 +31,12 @@ public class RyscActivity extends Activity {
     			JoinGameActivity.class);
     	startActivity(JoinGame);
     } 
+    
+    public void StartMap(View view) {
+    	Intent StartMap = new Intent(getApplicationContext(),
+    			MapTest.class);
+    	startActivity(StartMap);
+    }
     
     public void UdpSend(View view) {
     	Intent UdpSend = new Intent(getApplicationContext(),

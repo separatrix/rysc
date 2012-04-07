@@ -33,6 +33,14 @@
      	android:layout_below="@+id/btnNewGame"
      	android:layout_alignParentLeft="true"
      	android:onClick="JoinGame"/>
+    
+    <Button android:id="@+id/btnStartMap" 
+     	android:text="Map" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp" 
+     	android:layout_below="@+id/btnNewInternetGame"
+     	android:layout_alignParentLeft="true"
+     	android:onClick="StartMap"/>
      	
     <Button android:id="@+id/btnUdpSend" 
      	android:text="UDP Send" 

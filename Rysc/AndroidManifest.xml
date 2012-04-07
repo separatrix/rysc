@@ -9,7 +9,8 @@
 	<uses-permission android:name="android.permission.INTERNET" />
     <application android:icon="@drawable/rysclogo"> android:label="@string/app_name">
         <activity android:name=".RyscActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name"
+            	  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,5 +22,6 @@
         <activity android:name=".rules"></activity>
         <activity android:name=".StartGameActivity"></activity>
         <activity android:name=".JoinGameActivity"></activity>
+        <activity android:name=".MapTest"></activity>
     </application>
 </manifest>

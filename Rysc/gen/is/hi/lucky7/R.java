@@ -19,17 +19,17 @@ public final class R {
     }
     public static final class id {
         public static final int Logo=0x7f060003;
-        public static final int btnControls=0x7f060009;
+        public static final int btnControls=0x7f060008;
         public static final int btnListenForPlayers=0x7f060014;
         public static final int btnNewGame=0x7f060004;
-        public static final int btnNewInternetGame=0x7f060006;
+        public static final int btnNewInternetGame=0x7f060005;
         public static final int btnReceive=0x7f060018;
-        public static final int btnRules=0x7f060005;
+        public static final int btnRules=0x7f06000a;
         public static final int btnSend=0x7f060001;
-        public static final int btnStartMap=0x7f060007;
+        public static final int btnStartMap=0x7f060006;
         public static final int btnTextBased=0x7f06000b;
-        public static final int btnUdpReceive=0x7f06000a;
-        public static final int btnUdpSend=0x7f060008;
+        public static final int btnUdpReceive=0x7f060009;
+        public static final int btnUdpSend=0x7f060007;
         public static final int btn_send=0x7f06000e;
         public static final int edi_info=0x7f06000d;
         public static final int etIPinput=0x7f060013;

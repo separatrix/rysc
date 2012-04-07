@@ -10,28 +10,35 @@
     	android:layout_alignParentTop="true" 
     	android:layout_centerHorizontal="true"/>
     
-    <Button android:id="@+id/btnNewGame" 
+<!--     <Button android:id="@+id/btnNewGame"  -->
+<!--      	android:text="Start Game"  -->
+<!--      	android:layout_height="wrap_content"  -->
+<!--      	android:layout_width="150dp"  -->
+<!--      	android:layout_below="@+id/Logo"  -->
+<!--      	android:layout_alignParentLeft="true" -->
+<!--      	android:onClick="StartGame"/> -->
+
+<Button android:id="@+id/btnNewGame" 
      	android:text="Start Game" 
      	android:layout_height="wrap_content" 
-     	android:layout_width="150dp" 
-     	android:layout_below="@+id/Logo" 
-     	android:layout_alignParentLeft="true"
+     	android:layout_width="150dp"
+     	android:layout_toLeftOf="@+id/Logo"
      	android:onClick="StartGame"/>
-     	
-    <Button android:id="@+id/btnRules" 
-     	android:text="Rules" 
-     	android:layout_height="wrap_content" 
-     	android:layout_width="150dp" 
-     	android:layout_below="@+id/Logo" 
-     	android:layout_alignParentRight="true"
-     	android:onClick="ViewRules"/>
+    
+<!--      <Button -->
+<!--          android:id="@+id/button1" -->
+<!--          android:layout_width="150dp" -->
+<!--          android:layout_height="wrap_content" -->
+<!--          android:layout_alignParentLeft="true" -->
+<!--          android:layout_alignParentTop="true" -->
+<!--          android:text="Button" /> -->
      	
     <Button android:id="@+id/btnNewInternetGame" 
      	android:text="Join Game" 
      	android:layout_height="wrap_content" 
      	android:layout_width="150dp" 
      	android:layout_below="@+id/btnNewGame"
-     	android:layout_alignParentLeft="true"
+     	android:layout_toLeftOf="@+id/Logo"
      	android:onClick="JoinGame"/>
     
     <Button android:id="@+id/btnStartMap" 
@@ -39,7 +46,7 @@
      	android:layout_height="wrap_content" 
      	android:layout_width="150dp" 
      	android:layout_below="@+id/btnNewInternetGame"
-     	android:layout_alignParentLeft="true"
+     	android:layout_toLeftOf="@+id/Logo"
      	android:onClick="StartMap"/>
      	
     <Button android:id="@+id/btnUdpSend" 
@@ -61,14 +68,21 @@
      	android:onClick="UdpReceive"
      	android:clickable="false"
      	android:visibility="gone"/>
-     	
+    
+    <Button android:id="@+id/btnRules" 
+     	android:text="Rules" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp" 
+     	android:layout_toRightOf="@+id/Logo"
+     	android:onClick="ViewRules"/>
+     	     	
      <Button android:id="@+id/btnTextBased" 
      	android:text="Text Game" 
      	android:layout_height="wrap_content" 
      	android:layout_width="150dp"
      	android:layout_below="@+id/btnRules"
-     	android:layout_alignParentRight="true"
+     	android:layout_toRightOf="@+id/Logo"
      	android:onClick="TextGame"/>
-     	
+
  
 </RelativeLayout>

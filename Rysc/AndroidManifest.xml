@@ -19,9 +19,12 @@
 		<activity android:name="Play"></activity>
         <activity android:name=".UdpSendActivity"></activity>
         <activity android:name=".UdpReceiveActivity"></activity>
-        <activity android:name=".rules"></activity>
-        <activity android:name=".StartGameActivity"></activity>
-        <activity android:name=".JoinGameActivity"></activity>
+        <activity android:name=".rules"
+            	  android:screenOrientation="portrait"></activity>
+        <activity android:name=".StartGameActivity"
+            	  android:screenOrientation="portrait"></activity>
+        <activity android:name=".JoinGameActivity"
+            	  android:screenOrientation="portrait"></activity>
         <activity android:name=".MapTest"></activity>
     </application>
 </manifest>

@@ -26,5 +26,11 @@
         <activity android:name=".JoinGameActivity"
             	  android:screenOrientation="portrait"></activity>
         <activity android:name=".MapTest"></activity>
+        <activity android:name=".FileWriteTestActivity"></activity>        
+        <service 
+            android:name=".RyscService"
+            android:process=":RyscService"
+            android:label="RyscService"
+        ></service>
     </application>
 </manifest>

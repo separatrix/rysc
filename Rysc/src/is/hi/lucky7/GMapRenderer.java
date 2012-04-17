@@ -3,19 +3,22 @@ package is.hi.lucky7;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import android.content.Context;
 import android.opengl.GLSurfaceView.Renderer;
 // import android.opengl.GLU; surfaceChanged
 import android.opengl.GLU;
 
 public class GMapRenderer implements Renderer {
 	private GCountry country;
+	private GText text;
 	
-	public GMapRenderer() {
+	public GMapRenderer(Context c) {
 		country = new GCountry();
+		text = new GText(c);
 	}
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		gl.glClearColor(0.0f, 0.0f, 0.3f, 0.5f);
+		gl.glClearColor(0.1f, 0.1f, 0.3f, 0.5f);
 		gl.glShadeModel(GL10.GL_SMOOTH);
 		gl.glClearDepthf(1.0f);
 		gl.glEnable(GL10.GL_DEPTH_TEST);
@@ -28,39 +31,41 @@ public class GMapRenderer implements Renderer {
 		
 		gl.glLoadIdentity();
 		
-		gl.glTranslatef(0, 0, -10);
+//		gl.glTranslatef(0, 0, -10);
+//		
+//		gl.glTranslatef(0.2f, -0.1f, 0);
+//		
+//		gl.glPushMatrix();
+//		gl.glTranslatef(-5, 3.3f, 0);
+//		country.draw(gl);
+//		gl.glPopMatrix();
+//		
+//		gl.glPushMatrix();
+//		gl.glTranslatef(-3.9f, 1.2f, 0);
+//		country.draw(gl);
+//		gl.glPopMatrix();
+//		
+//		gl.glPushMatrix();
+//		gl.glTranslatef(-6, 1.2f, 0);
+//		country.draw(gl);
+//		gl.glPopMatrix();
+//		
+//		gl.glPushMatrix();
+//		gl.glTranslatef(-5, -0.9f, 0);
+//		country.draw(gl);
+//		gl.glPopMatrix();
+//		
+//		gl.glPushMatrix();
+//		gl.glTranslatef(-5, -3, 0);
+//		country.draw(gl);
+//		gl.glPopMatrix();
+//		
+//		gl.glPushMatrix();
+//		gl.glTranslatef(-2.9f, -3, 0);
+//		country.draw(gl);
+//		gl.glPopMatrix();
 		
-		gl.glTranslatef(0.2f, -0.1f, 0);
-		
-		gl.glPushMatrix();
-		gl.glTranslatef(-5, 3.3f, 0);
-		country.draw(gl);
-		gl.glPopMatrix();
-		
-		gl.glPushMatrix();
-		gl.glTranslatef(-3.9f, 1.2f, 0);
-		country.draw(gl);
-		gl.glPopMatrix();
-		
-		gl.glPushMatrix();
-		gl.glTranslatef(-6, 1.2f, 0);
-		country.draw(gl);
-		gl.glPopMatrix();
-		
-		gl.glPushMatrix();
-		gl.glTranslatef(-5, -0.9f, 0);
-		country.draw(gl);
-		gl.glPopMatrix();
-		
-		gl.glPushMatrix();
-		gl.glTranslatef(-5, -3, 0);
-		country.draw(gl);
-		gl.glPopMatrix();
-		
-		gl.glPushMatrix();
-		gl.glTranslatef(-2.9f, -3, 0);
-		country.draw(gl);
-		gl.glPopMatrix();
+		text.drawText(gl);
 	}
 	
 	public void onSurfaceChanged(GL10 gl, int width, int height) {

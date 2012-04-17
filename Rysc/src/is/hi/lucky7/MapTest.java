@@ -14,7 +14,7 @@ public class MapTest extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GLSurfaceView view = new GLSurfaceView(this);
-        view.setRenderer(new GMapRenderer());
+        view.setRenderer(new GMapRenderer(this));
         setContentView(view);
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <EditText 
+    	android:id="@+id/etStringInput" 
+    	android:layout_width="match_parent" 
+    	android:layout_height="wrap_content">
+        <requestFocus></requestFocus>
+    </EditText>
+    <Button 
+    	android:text="Save input" 
+    	android:id="@+id/btnSave" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:onClick="writeTest">
+    </Button>
+    <Button 
+    	android:text="Read input" 
+    	android:id="@+id/btnRead" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:onClick="readTest">
+    </Button>
+    <TextView 
+    	android:text="Text: " 
+    	android:id="@+id/twReadFromFile" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    
+</LinearLayout>

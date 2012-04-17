@@ -12,9 +12,10 @@ public class MapTest extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        GLSurfaceView view = new GLSurfaceView(this);
-        view.setRenderer(new GMapRenderer(this));
-        setContentView(view);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        GLSurfaceView view = new GLSurfaceView(this);
+//        view.setRenderer(new GMapRenderer(this));
+//        setContentView(view);
+        setContentView(new GMapView(this,getWindowManager()));
     }
 }

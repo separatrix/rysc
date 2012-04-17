@@ -10,7 +10,7 @@ public class Game {
 	public Game() {}
 	public void addContinent(Continent ce) {
 		continents.add(ce);
-	}	
+	}
 	public void addCountry(Country c) {
 		countries.add(c);
 	}

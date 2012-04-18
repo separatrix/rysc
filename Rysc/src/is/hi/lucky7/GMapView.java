@@ -206,20 +206,17 @@ public class GMapView extends View {
 				game.getCountries().get(selected).setArmies(game.getCountries().get(0).getArmies()+rein);
 				phase++;
 			case 2:
-				phase++;
-			case 3:
 				if (game.getCountries().get(selected).getOwner().getId() != 1) {
 					break;
 				}
 				attID = selected;
 				phase++;
 				break;
-			case 4:
-				phase++;
-			case 5:
+			case 3:
 				if (game.getCountries().get(selected).getOwner().getId() == 1) {
 					break;
 				}
+//				if (game.getCountries().get(selected).)
 				defID = selected;
 				game.Attack(game.getCountries().get(attID), game.getCountries().get(defID));
 				phase = 3;

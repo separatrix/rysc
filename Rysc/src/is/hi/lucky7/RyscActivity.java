@@ -3,7 +3,6 @@ package is.hi.lucky7;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 public class RyscActivity extends Activity {
@@ -54,5 +53,11 @@ public class RyscActivity extends Activity {
        	Intent Play = new Intent(getApplicationContext(),
        			Play.class);
        	startActivity(Play);
+    } 
+    
+    public void FileTest(View view) {
+       	Intent FileWriteTestActivity = new Intent(getApplicationContext(),
+       			FileWriteTestActivity.class);
+       	startActivity(FileWriteTestActivity);
     } 
 }

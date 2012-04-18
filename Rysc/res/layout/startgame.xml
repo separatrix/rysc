@@ -23,36 +23,32 @@
     	android:entries="@array/number_of_players"
         android:prompt="@string/player_prompt">
     </Spinner>
-    <TextView 
-    	android:text="Input IP below for emulator/phone test." 
-    	android:id="@+id/twInputIP" 
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content">
-    </TextView>
-    <EditText 
-    	android:layout_width="match_parent" 
-    	android:layout_height="wrap_content" 
-    	android:id="@+id/etIPinput">
-    	</EditText>
     <Button 
-    	android:text="Listen for players" 
+    	android:text="Start game lobby" 
     	android:id="@+id/btnListenForPlayers" 
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content"
-    	android:onClick="ListenForPlayers">
+    	android:onClick="startGame">
     </Button>
     <TextView
-    	android:text="Connected IP Addresses: " 
-    	android:id="@+id/twIPlistStatic" 
+    	android:text="Server Response: " 
+    	android:id="@+id/twServerResponseStatic" 
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content">
     </TextView>
         <TextView
     	android:text="" 
-    	android:id="@+id/twIPlist" 
+    	android:id="@+id/twServerResponce" 
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content">
     </TextView>
+    <Button 
+    	android:text="Stop Service" 
+    	android:id="@+id/stopService" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:onClick="StopService">
+    </Button>
     
     
 </LinearLayout>

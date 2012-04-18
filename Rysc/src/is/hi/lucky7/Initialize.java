@@ -8,23 +8,21 @@ public class Initialize {
 		Game.addPlayer(Player1);
 		Player Player2 = new Player(2,"Player2");
 		Game.addPlayer(Player2);
-
-		//çstral’a
+		
+		//Ástralía
 		//Country easaus = new Country(0,"Eastern Australia",Player1,4,0);
 		Country easaus = new Country(0,"Eastern Australia",Player1,4,0);
 		easaus.addBorders(1);
 		easaus.addBorders(2);
 		Player1.addCountry(easaus);
 		Game.addCountry(easaus);
-		//40
-
+		
 		Country newgui = new Country(1,"New Guinea",Player1,4,0);
 		newgui.addBorders(0);
 		newgui.addBorders(2);
 		newgui.addBorders(3);
 		Player1.addCountry(newgui);
 		Game.addCountry(newgui);
-		//39
 		
 		Country wesaus = new Country(2,"Western Australia",Player1,3,0);
 		wesaus.addBorders(0);
@@ -32,7 +30,6 @@ public class Initialize {
 		wesaus.addBorders(3);
 		Player1.addCountry(wesaus);
 		Game.addCountry(wesaus);
-		//41
 		
 		Country indone = new Country(3,"Indonesia",Player1,3,0);
 		indone.addBorders(1);
@@ -40,15 +37,13 @@ public class Initialize {
 		indone.addBorders(32);
 		Player1.addCountry(indone);
 		Game.addCountry(indone);
-		//38
-
+		
 		Country argent = new Country(4,"Argentina",Player2,3,1);
 		argent.addBorders(5);
 		argent.addBorders(6);
 		Player2.addCountry(argent);
 		Game.addCountry(argent);
-		//12
-
+		
 		Country brazil = new Country(5,"Brazil",Player1,4,1);
 		brazil.addBorders(4);
 		brazil.addBorders(6);
@@ -56,40 +51,35 @@ public class Initialize {
 		brazil.addBorders(12);
 		Player1.addCountry(brazil);
 		Game.addCountry(brazil);
-		//10
-
+		
 		Country peru = new Country(6,"Peru",Player1,3,1);
 		peru.addBorders(4);
 		peru.addBorders(5);
 		peru.addBorders(7);
 		Player1.addCountry(peru);
 		Game.addCountry(peru);
-		//11
-
+		
 		Country venezu = new Country(7,"Venezuela",Player2,4,1);
 		venezu.addBorders(5);
 		venezu.addBorders(6);
 		venezu.addBorders(14);
 		Player2.addCountry(venezu);
 		Game.addCountry(venezu);
-		//9
-
+		
 		Country souafr = new Country(8,"South Africa",Player2,3,2);
 		souafr.addBorders(9);
 		souafr.addBorders(10);
 		souafr.addBorders(11);
 		Player2.addCountry(souafr);
 		Game.addCountry(souafr);
-		//24
-
+		
 		Country congo = new Country(9,"Congo",Player2,4,2);
 		congo.addBorders(8);
 		congo.addBorders(10);
 		congo.addBorders(12);
 		Player2.addCountry(congo);
 		Game.addCountry(congo);
-		//48
-
+		
 		Country easafr = new Country(10,"East Africa",Player2,4,2);
 		easafr.addBorders(8);
 		easafr.addBorders(9);
@@ -99,15 +89,13 @@ public class Initialize {
 		easafr.addBorders(30);
 		Player2.addCountry(easafr);
 		Game.addCountry(easafr);
-		//22
-
+		
 		Country madaga = new Country(11,"Madagascar",Player2,3,2);
 		madaga.addBorders(8);
 		madaga.addBorders(10);
 		Player2.addCountry(madaga);
 		Game.addCountry(madaga);
-		//25
-
+		
 		Country norafr = new Country(12,"North Africa",Player2,4,2);
 		norafr.addBorders(5);
 		norafr.addBorders(9);
@@ -117,8 +105,7 @@ public class Initialize {
 		norafr.addBorders(28);
 		Player2.addCountry(norafr);
 		Game.addCountry(norafr);
-		//20
-
+		
 		Country egypt = new Country(13,"Egypt",Player2,2,2);
 		egypt.addBorders(10);
 		egypt.addBorders(12);
@@ -126,16 +113,14 @@ public class Initialize {
 		egypt.addBorders(30);
 		Player2.addCountry(egypt);
 		Game.addCountry(egypt);
-		//21
-
+		
 		Country mexico = new Country(14,"Mexico",Player1,3,3);
 		mexico.addBorders(7);
 		mexico.addBorders(15);
 		mexico.addBorders(16);
 		Player1.addCountry(mexico);
 		Game.addCountry(mexico);
-		//8
-
+		
 		Country wesusa = new Country(15,"Western United States",Player2,3,3);
 		wesusa.addBorders(14);
 		wesusa.addBorders(16);
@@ -143,8 +128,7 @@ public class Initialize {
 		wesusa.addBorders(18);
 		Player2.addCountry(wesusa);
 		Game.addCountry(wesusa);
-		//6
-
+		
 		Country easusa = new Country(16,"Eastern United States",Player2,3,3);
 		easusa.addBorders(14);
 		easusa.addBorders(15);
@@ -152,7 +136,7 @@ public class Initialize {
 		easusa.addBorders(19);
 		Player2.addCountry(easusa);
 		Game.addCountry(easusa);
-
+		
 		Country wescan = new Country(17,"Western Canada",Player1,3,3);
 		wescan.addBorders(15);
 		wescan.addBorders(18);
@@ -160,7 +144,7 @@ public class Initialize {
 		wescan.addBorders(21);
 		Player1.addCountry(wescan);
 		Game.addCountry(wescan);
-
+		
 		Country ontari = new Country(18,"Ontario",Player1,3,3);
 		ontari.addBorders(15);
 		ontari.addBorders(16);
@@ -170,21 +154,21 @@ public class Initialize {
 		ontari.addBorders(22);
 		Player1.addCountry(ontari);
 		Game.addCountry(ontari);
-
+		
 		Country quebec = new Country(19,"Quebec",Player1,2,3);
 		quebec.addBorders(16);
 		quebec.addBorders(18);
 		quebec.addBorders(22);
 		Player1.addCountry(quebec);
 		Game.addCountry(quebec);
-
+		
 		Country alaska = new Country(20,"Alaska",Player2,2,3);
 		alaska.addBorders(17);
 		alaska.addBorders(21);
 		alaska.addBorders(40);
 		Player2.addCountry(alaska);
 		Game.addCountry(alaska);
-
+		
 		Country nwterr = new Country(21,"Northwest Territory",Player1,2,3);
 		nwterr.addBorders(17);
 		nwterr.addBorders(18);
@@ -192,7 +176,7 @@ public class Initialize {
 		nwterr.addBorders(22);
 		Player1.addCountry(nwterr);
 		Game.addCountry(nwterr);
-
+		
 		Country greenl = new Country(22,"Greenland - Nunavut",Player2,5,3);
 		greenl.addBorders(18);
 		greenl.addBorders(19);
@@ -200,14 +184,14 @@ public class Initialize {
 		greenl.addBorders(23);
 		Player2.addCountry(greenl);
 		Game.addCountry(greenl);
-
+		
 		Country icelan = new Country(23,"Iceland",Player2,3,4);
 		icelan.addBorders(22);
 		icelan.addBorders(24);
 		icelan.addBorders(25);
 		Player2.addCountry(icelan);
 		Game.addCountry(icelan);
-
+		
 		Country scandi = new Country(24,"Scandinavia",Player2,2,4);
 		scandi.addBorders(23);
 		scandi.addBorders(25);
@@ -215,7 +199,7 @@ public class Initialize {
 		scandi.addBorders(29);
 		Player2.addCountry(scandi);
 		Game.addCountry(scandi);
-
+		
 		Country grebri = new Country(25,"Great Britain",Player2,3,4);
 		grebri.addBorders(23);
 		grebri.addBorders(24);
@@ -223,7 +207,7 @@ public class Initialize {
 		grebri.addBorders(27);
 		Player2.addCountry(grebri);
 		Game.addCountry(grebri);
-
+		
 		Country weseur = new Country(26,"Western Europe",Player2,1,4);
 		weseur.addBorders(12);
 		weseur.addBorders(25);
@@ -231,7 +215,7 @@ public class Initialize {
 		weseur.addBorders(27);
 		Player2.addCountry(weseur);
 		Game.addCountry(weseur);
-
+		
 		Country noreur = new Country(27,"Northern Europe",Player2,3,4);
 		noreur.addBorders(24);
 		noreur.addBorders(25);
@@ -240,7 +224,7 @@ public class Initialize {
 		noreur.addBorders(29);
 		Player2.addCountry(noreur);
 		Game.addCountry(noreur);
-
+		
 		Country soueur = new Country(28,"Southern Europe",Player2,3,4);
 		soueur.addBorders(12);
 		soueur.addBorders(13);
@@ -250,7 +234,7 @@ public class Initialize {
 		soueur.addBorders(30);
 		Player2.addCountry(soueur);
 		Game.addCountry(soueur);
-
+		
 		Country ukrain = new Country(29,"Ukraine",Player1,4,4);
 		ukrain.addBorders(24);
 		ukrain.addBorders(27);
@@ -258,9 +242,9 @@ public class Initialize {
 		ukrain.addBorders(30);
 		ukrain.addBorders(33);
 		ukrain.addBorders(35);
-		Player2.addCountry(ukrain);
+		Player1.addCountry(ukrain);
 		Game.addCountry(ukrain);
-
+		
 		Country mideas = new Country(30,"Middle East",Player2,2,5);
 		mideas.addBorders(10);
 		mideas.addBorders(13);
@@ -270,7 +254,7 @@ public class Initialize {
 		mideas.addBorders(33);
 		Player2.addCountry(mideas);
 		Game.addCountry(mideas);
-
+		
 		Country india = new Country(31,"India",Player1,2,5);
 		india.addBorders(30);
 		india.addBorders(32);
@@ -278,14 +262,14 @@ public class Initialize {
 		india.addBorders(34);
 		Player1.addCountry(india);
 		Game.addCountry(india);
-
+		
 		Country siam = new Country(32,"Siam",Player2,1,5);
 		siam.addBorders(3);
 		siam.addBorders(31);
 		siam.addBorders(34);
 		Player2.addCountry(siam);
 		Game.addCountry(siam);
-
+		
 		Country afghan = new Country(33,"Afghanistan",Player1,3,5);
 		afghan.addBorders(29);
 		afghan.addBorders(30);
@@ -294,7 +278,7 @@ public class Initialize {
 		afghan.addBorders(35);
 		Player1.addCountry(afghan);
 		Game.addCountry(afghan);
-
+		
 		Country china = new Country(34,"China",Player1,2,5);
 		china.addBorders(31);
 		china.addBorders(32);

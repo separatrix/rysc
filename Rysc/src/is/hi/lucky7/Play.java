@@ -17,7 +17,7 @@ public class Play extends Activity {
 	Game Game = i.getGame();
 	ArrayList<Country> countries = Game.getCountries();
 	ArrayList<Player> players = Game.getPlayers();
-	int todo = 0; //Leikmaður sem á að gera.
+	int todo = 1; //Leikmaður sem á að gera.
 	int rein = Game.getReinforcements(players.get(0));
 	int init = 1;
 	/** Called when the activity is first created. */
@@ -66,7 +66,7 @@ public class Play extends Activity {
     			todo++;
     			if (todo == players.size()) {
     				//Heill hringur kominn
-    				todo = 0;
+    				todo = 1;
     			}
     			rein = Game.getReinforcements(players.get(todo));
     			PrintCountries();
@@ -74,9 +74,11 @@ public class Play extends Activity {
     		}
     		else {
         		String[] att = txt.split(",");
-    			Game.Attack(Game.getCountries().get(Integer.parseInt(att[0])),Game.getCountries().get(Integer.parseInt(att[1])));
+    			Game.Attack(is.hi.lucky7.Game.getCountries().get(Integer.parseInt(att[0])),is.hi.lucky7.Game.getCountries().get(Integer.parseInt(att[1])));
     		}
     	}
+    Gamestate g = new Gamestate();
+    g.getGamestate(Game, todo);
     }
     public void PrintCountries() {
     	txt_log.setText(players.get(todo).getName() + "'s turn\n");

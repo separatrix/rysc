@@ -83,6 +83,13 @@
      	android:layout_below="@+id/btnRules"
      	android:layout_toRightOf="@+id/Logo"
      	android:onClick="TextGame"/>
+     <Button android:id="@+id/btnFileTest" 
+     	android:text="File Test" 
+     	android:layout_height="wrap_content" 
+     	android:layout_width="150dp"
+     	android:layout_below="@+id/btnTextBased"
+     	android:layout_toRightOf="@+id/Logo"
+     	android:onClick="FileTest"/>
 
  
 </RelativeLayout>

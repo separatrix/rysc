@@ -16,12 +16,15 @@ public class RyscService extends Service{
 	private final IBinder mBinder = new MyBinder();
 	private static final long checkInterval = 10000; 
 	private notificationHandler not = new notificationHandler(this);
-	
-	private static final String new_move_title = "New Move";
-	private static final String new_move_msg = "A new move has been made!";
-	private static final String your_turn_title = "Your turn";
-	private static final String your_turn_msg = "It's your turn in your current Rysc game";
 
+	private static String gamestate = "";
+	private static int playerID = 0;
+	private static final String new_move_title = "New Move Received";
+	private static final String new_move_msg = "The war progresses";
+	private static final String your_turn_title = "Your turn";
+	private static final String your_turn_msg = "Make your move soldier";
+	private static final String game_not_started = "999";
+	
 	// TODO: Add handling for the case where the user is waiting for a game to start.
 	//			Will probably be just the gamestate string as a predetermined value.
 	
@@ -57,7 +60,34 @@ public class RyscService extends Service{
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
 		Log.d(TAG,"Service Started");
+		gamestate = FileHandler.readGamestate(getApplicationContext());
+		playerID = FileHandler.readPlayerId(getApplicationContext());
+		
 		pollForUpdates();
+	}
+	
+	public String getGameId(String gs)
+	{
+		String data[] = gs.split(":");
+		return data[0];
+	}
+	
+	public boolean myTurn(String gs)
+	{
+		try {
+			String data[] = gs.split(":");
+			Log.d(TAG,"Local Player: "+ playerID);
+			Log.d(TAG,"Player to move: "+data[1]);
+			int playerToMove = Integer.parseInt(data[1]);
+			
+			if(playerToMove == (playerID))
+				return true;
+			else
+				return false;
+			} catch (Exception ex){
+				return false;
+			}
+		
 	}
 	
 	private void pollForUpdates() {
@@ -65,40 +95,31 @@ public class RyscService extends Service{
 
 			// IF IT'S NOT MY TURN:
 			// Fetch gameID and LOCAL gamestate from LOCAL storage
-			String tmp = FileHandler.readGamestate(getApplicationContext());
-			String data[] = tmp.split(",",2);
-			Log.d(TAG,tmp);
-			Log.d(TAG,Arrays.toString(data));
-			Log.d(TAG,"data[0] = " +data[0]);
-			Log.d(TAG,"data[1] = " +data[1]);
 			
-			int id = Integer.parseInt(data[0]);
-			String local_gs = data[1];
-			
+			int id = Integer.parseInt(getGameId(gamestate)); 
+			Log.d(TAG,"id: "+Integer.toString(id));
 			// Fetch serverGamestate for the corresponding gameID
 			// TODO: Add error handling for the case where there is no game running with gameID = id
 			String server_gs = HttpHandler.getGamestate(id);
 			Log.d(TAG,"Server gamestate: "+server_gs);
 			
+			if(!server_gs.equals(game_not_started)) { 
 			// Check if LOCAL gamestate == serverGamestate
-			if(!local_gs.equals(server_gs)) {
-				// if not then save serverGamestate as local gamestate and notify user.
-				FileHandler.saveGamestate(id, server_gs, getApplicationContext());
-				not.postNotification(id, new_move_title, new_move_msg, System.currentTimeMillis());
+				myTurn(server_gs);
+				if(!gamestate.equals(server_gs)) {
+					// if not then save serverGamestate as local gamestate and notify user.
+					gamestate = server_gs;
+					FileHandler.saveGamestate(server_gs, getApplicationContext());
+					Log.d(TAG,Boolean.toString(myTurn(gamestate)));
+					if(myTurn(gamestate)) {
+						not.postNotification(id, your_turn_title, your_turn_msg, System.currentTimeMillis());
+						stopSelf();
+					}
+					else {
+						not.postNotification(id, new_move_title, new_move_msg, System.currentTimeMillis());
+					}
+				}
 			}
-			
-			// TODO: Add handling for the case where it's the local user's turn (see below).
-			//		if it's MY TURN then notify user and turn off service.
-			
-			// IF IT'S MY TURN:
-			// Do from within program:
-			// Submit gamestate at turn end. (ASyncTask?)
-			//		Check if gamestate received by server. If not then try again until
-			//		the server acknowledges.
-			// Start RyscService
-			
-			
-			//not.postNotification(gameID, "Haro!", "This is service.", System.currentTimeMillis());
 		}
 		},0,checkInterval);
 	} 

@@ -14,42 +14,37 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class JoinGameActivity extends Activity {
+	private static final String TAG = JoinGameActivity.class.getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.joingame);
 	}
-	
-	// TODO: Consider adding a check here to see if the request was received by the host device.
-	
-	private static final int UDP_SERVER_PORT = 11111;
-	private static final String status = "Status: ";
-	private static InetAddress serverAddr;
-	
+		
 	public void JoinGame(View view)
 	{
 		EditText etIpInput = (EditText) findViewById(R.id.etIpInput);
-		String address = etIpInput.getText().toString();
-
-		try {
-			serverAddr = InetAddress.getByName(address);
-			Toast.makeText( getApplicationContext(),"Entering Broadcast",Toast.LENGTH_SHORT).show();
-			UdpHelper.connect(UDP_SERVER_PORT);
-			UdpHelper.send(serverAddr, UDP_SERVER_PORT, "join");
-		} catch (UnknownHostException e) {
-			Log.i("UnknownHost",e.getMessage());
-			Toast.makeText( getApplicationContext(),"UnknownHost",Toast.LENGTH_SHORT).show();
-		} catch (Exception e) {
-			Log.i("Exception",e.getMessage());
-			Toast.makeText( getApplicationContext(),"Exception occurred",Toast.LENGTH_SHORT).show();
-		}
+		String gameID = etIpInput.getText().toString();
+		int gid = Integer.parseInt(gameID);
 		
-		// TODO: Start an AsyncTask to recieve messages concerning the game Starting.
-		new joinChecker().execute();
+		String response = HttpHandler.joinGame(gid);
+		Log.d(TAG,"Server response: "+response);
+		int playerID = Integer.parseInt(response.trim());
 		
+		Log.d(TAG, "Gid: " + Integer.toString(gid));
+        Log.d(TAG, "Response: " + response);
+        
+        FileHandler.savePlayerId(playerID, this);
+		FileHandler.saveGamestate(gameID+":", this);
+		
+		TextView twJoinStatus = (TextView) findViewById(R.id.twJoinStatus);
+		twJoinStatus.setText(response);
+		
+        startService(new Intent(this, RyscService.class));
 	}
 	
+	/*
 	private class joinChecker extends AsyncTask<Void, String, Void>
 	{
 		private static final int MAX_UDP_DATAGRAM_LEN = 1500;
@@ -101,4 +96,5 @@ public class JoinGameActivity extends Activity {
 			twJoinStatus.setText(status + "Contacting server");
 	     }
 	}
+	*/
 }

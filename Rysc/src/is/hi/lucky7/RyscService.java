@@ -105,6 +105,7 @@ public class RyscService extends Service{
 			
 			if(!server_gs.equals(game_not_started)) { 
 			// Check if LOCAL gamestate == serverGamestate
+				myTurn(server_gs);
 				if(!gamestate.equals(server_gs)) {
 					// if not then save serverGamestate as local gamestate and notify user.
 					gamestate = server_gs;
@@ -119,16 +120,6 @@ public class RyscService extends Service{
 					}
 				}
 			}
-			
-			// IF IT'S MY TURN:
-			// Do from within program:
-			// Submit gamestate at turn end. (ASyncTask?)
-			//		Check if gamestate received by server. If not then try again until
-			//		the server acknowledges.
-			// Start RyscService
-			
-			
-			//not.postNotification(gameID, "Haro!", "This is service.", System.currentTimeMillis());
 		}
 		},0,checkInterval);
 	} 

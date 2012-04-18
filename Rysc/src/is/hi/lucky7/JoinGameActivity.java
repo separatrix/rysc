@@ -29,11 +29,13 @@ public class JoinGameActivity extends Activity {
 		int gid = Integer.parseInt(gameID);
 		
 		String response = HttpHandler.joinGame(gid);
-
+		Log.d(TAG,"Server response: "+response);
+		int playerID = Integer.parseInt(response.trim());
+		
 		Log.d(TAG, "Gid: " + Integer.toString(gid));
         Log.d(TAG, "Response: " + response);
         
-        FileHandler.savePlayerId(gid, this);
+        FileHandler.savePlayerId(playerID, this);
 		FileHandler.saveGamestate(gameID+":", this);
 		
 		TextView twJoinStatus = (TextView) findViewById(R.id.twJoinStatus);

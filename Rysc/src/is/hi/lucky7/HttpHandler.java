@@ -103,7 +103,7 @@ public class HttpHandler {
 		        HttpEntity entity = response.getEntity();
 		        InputStream is = entity.getContent();
 		        BufferedInputStream b = new BufferedInputStream(is); 
-		        ByteArrayBuffer buffer = new ByteArrayBuffer(500);
+		        ByteArrayBuffer buffer = new ByteArrayBuffer(20);
 		        
 		        int current = 0;
 		        

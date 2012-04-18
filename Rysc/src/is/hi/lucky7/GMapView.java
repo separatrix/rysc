@@ -68,6 +68,7 @@ public class GMapView extends View {
 	
 	private ArrayList<Country> countries;
 	private ArrayList<Player> players;
+	private Game game;
 	
 	private int phase = 0; // 0 = Not your turn, 1 = Reinforce, 2 = Attack
 	
@@ -133,6 +134,13 @@ public class GMapView extends View {
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
+		int selected;
+		switch (phase) {
+			case 0:
+				break;
+			case 1:
+				
+		}
 		Log.d("Hey","Touched");
 		Log.d("X", ""+event.getX());
 		Log.d("Y", ""+event.getY());

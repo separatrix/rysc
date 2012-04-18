@@ -22,60 +22,109 @@ public class GMapView extends View {
 	private Paint paint;
 	private Paint paintB;
 	private TextView t_one;
-	private int countryCoords[] = {	75,113,		// Alaska
-									185,115,	// No. Canada
-									425,95,		// Greenland
+//	private int countryCoords[] = {	75,113,		// Alaska
+//									185,115,	// No. Canada
+//									425,95,		// Greenland
+//									180,190,	// SW Canada
+//									260,210,	// S Canada
+//									350,200,	// E Canada
+//									180,290,	// W Usa
+//									280,320,	// E Usa
+//									185,380,	// Mexico
+//									280,480,	// Colombia
+//									385,580,	// Brazil
+//									310,590,	// Peru
+//									320,680,	// Chile
+//									540,150,	// Iceland
+//									630,160,	// Norway
+//									510,260,	// UK
+//									630,285,	// Baltic
+//									730,220,	// W Russia
+//									530,400,	// Spain
+//									630,370,	// Italy
+//									570,540,	// W Africa
+//									670,490,	// Egypt
+//									720,560,	// Horn
+//									670,630,	// C Africa
+//									670,740,	// S Africa
+//									780,740,	// Madagascar
+//									760,440,	// M East
+//									840,320,	// Kazakh
+//									900,440,	// India
+//									980,380,	// China
+//									870,220,	// C Russia
+//									930,150,	// N Russia
+//									990,480,	// Thailand
+//									1010,300,	// Korea
+//									1000,230,	// SE Russia
+//									1030,110,	// NE Russia
+//									1110,120,	// E Russia
+//									1130,310,	// Japan
+//									1010,620,	// Phillipines
+//									1110,590,	// New Zealand
+//									1120,690,	// E Aus
+//									1040,720,	// W Aus
+//									};
+	
+	private int countryCoords[] = {	1120,690,	// E Aus
+									1110,590,	// New Zealand.
+									1040,720,	// W Aus
+									1010,620,	// Phillipines
+									320,680,	// Chile
+									385,580,	// Brazil
+									310,590,	// Peru
+									280,480,	// Colombia
+									670,740,	// S Africa
+									670,630,	// C Africa
+									720,560,	// Horn
+									780,740,	// Madagascar
+									570,540,	// W Africa
+									670,490,	// Egypt
+									185,380,	// Mexico
+									180,290,	// W Usa
+									280,320,	// E Usa
 									180,190,	// SW Canada
 									260,210,	// S Canada
 									350,200,	// E Canada
-									180,290,	// W Usa
-									280,320,	// E Usa
-									185,380,	// Mexico
-									280,480,	// Colombia
-									385,580,	// Brazil
-									310,590,	// Peru
-									320,680,	// Chile
+									75,113,		// Alaska
+									185,115,	// No. Canada
+									425,95,		// Greenland
 									540,150,	// Iceland
 									630,160,	// Norway
 									510,260,	// UK
-									630,285,	// Baltic
-									730,220,	// W Russia
 									530,400,	// Spain
+									630,285,	// Baltic
 									630,370,	// Italy
-									570,540,	// W Africa
-									670,490,	// Egypt
-									720,560,	// Horn
-									670,630,	// C Africa
-									670,740,	// S Africa
-									780,740,	// Madagascar
+									730,220,	// W Russia
 									760,440,	// M East
-									840,320,	// Kazakh
 									900,440,	// India
+									990,480,	// Thailand 
+									840,320,	// Kazakh
 									980,380,	// China
 									870,220,	// C Russia
 									930,150,	// N Russia
-									990,480,	// Thailand
 									1010,300,	// Korea
-									1000,230,	// SE Russia
-									1030,110,	// NE Russia
-									1110,120,	// E Russia
 									1130,310,	// Japan
-									1010,620,	// Phillipines
-									1110,590,	// New Zealand
-									1120,690,	// E Aus
-									1040,720,	// W Aus
-									};
+									1000,230,	// SE Russia
+									1110,120,	// E Russia
+									1030,110,	// NE Russia
+	};
 	
-	private ArrayList<Country> countries;
-	private ArrayList<Player> players;
 	private Game game;
 	
-	private int phase = 0; // 0 = Not your turn, 1 = Reinforce, 2 = Attack
+	private int phase = 1; // 0 = Not your turn, 1 = Reinforce, 2 = Attack
 	
-	public GMapView(Context context, WindowManager _wm) {
+	float scaleH;
+	float scaleW;
+	
+	int attID;
+	int defID;
+	
+	public GMapView(Context context, WindowManager _wm, Game g) {
 		super(context);
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.map1);
 		wm = _wm;
+		game = g;
 		
 		t_one = new TextView(context);
 		
@@ -95,11 +144,8 @@ public class GMapView extends View {
 	}
 	
 	protected void onDraw(Canvas canvas) {		
-		float scaleH = (float)(canvas.getHeight()-25)/bmp.getHeight();
-		float scaleW = (float)canvas.getWidth()/bmp.getWidth();
-		
-		Log.d("Height",""+scaleH);
-		Log.d("Width",""+scaleW);
+		scaleH = (float)(canvas.getHeight()-25)/bmp.getHeight();
+		scaleW = (float)canvas.getWidth()/bmp.getWidth();
 		
 		canvas.drawColor(Color.BLACK);
 		canvas.scale(scaleW,scaleH);
@@ -108,15 +154,15 @@ public class GMapView extends View {
 		String armies = "0";
 		
 		for(int i=0; i<countryCoords.length; i +=2) {
-			switch (countries.get(i/2).getOwner().getId()) {
+			switch (game.getCountries().get(i/2).getOwner().getId()) {
 				case 0:
 					paintB.setColor(Color.BLUE);
 					break;
 				case 1:
-					paintB.setColor(Color.RED);
+					paintB.setColor(Color.rgb(200, 50, 50));
 					break;
 				case 2:
-					paintB.setColor(Color.GREEN);
+					paintB.setColor(Color.rgb(50,180,50));
 					break;
 				case 3:
 					paintB.setColor(Color.YELLOW);
@@ -126,7 +172,7 @@ public class GMapView extends View {
 					break;
 			}
 			
-			armies = "" + countries.get(i/2).getArmies();
+			armies = "" + game.getCountries().get(i/2).getArmies();
 			
 			canvas.drawCircle(countryCoords[i]+2, countryCoords[i+1]-8, 35, paintB);
 			canvas.drawText(armies,countryCoords[i],countryCoords[i+1],paint);
@@ -134,16 +180,59 @@ public class GMapView extends View {
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
-		int selected;
+		if (event.getAction() != MotionEvent.ACTION_UP) {
+			return true;
+		}
+		Log.d("action", ""+event.getAction());
+		
+		int selected = 0;
+		
+		for(int i=0; i<countryCoords.length; i +=2) {
+			if (Math.abs((event.getX()/scaleW)-countryCoords[i]) < 35 && Math.abs((event.getY()/scaleH)-countryCoords[i+1]) < 25) {		
+				selected = i/2;
+				break;
+			}
+		}		
+		
 		switch (phase) {
 			case 0:
 				break;
 			case 1:
-				
+				if (game.getCountries().get(selected).getOwner().getId() != 1) {
+					break;
+				}
+				int rein = game.getReinforcements(game.getPlayers().get(0));
+				Log.d("Rein",""+rein);
+				game.getCountries().get(selected).setArmies(game.getCountries().get(0).getArmies()+rein);
+				phase++;
+			case 2:
+				phase++;
+			case 3:
+				if (game.getCountries().get(selected).getOwner().getId() != 1) {
+					break;
+				}
+				attID = selected;
+				phase++;
+				break;
+			case 4:
+				phase++;
+			case 5:
+				if (game.getCountries().get(selected).getOwner().getId() == 1) {
+					break;
+				}
+				defID = selected;
+				game.Attack(game.getCountries().get(attID), game.getCountries().get(defID));
+				phase = 3;
+				break;
+			default:
+				phase = 0;
+				break;
 		}
-		Log.d("Hey","Touched");
-		Log.d("X", ""+event.getX());
-		Log.d("Y", ""+event.getY());
+		
+		Log.d("selected",""+selected);
+		
+		this.invalidate();
+		
 		return true;
 	}
 }

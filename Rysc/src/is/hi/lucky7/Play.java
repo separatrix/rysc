@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,20 +20,20 @@ public class Play extends Activity {
 	TextView txt_log;
 	EditText edi_info;
 	Initialize i = new Initialize();
-	Game Game = i.getGame();
-	ArrayList<Country> countries = Game.getCountries();
-	ArrayList<Player> players = Game.getPlayers();
+	Game game = i.getGame();
+	ArrayList<Country> countries = game.getCountries();
+	ArrayList<Player> players = game.getPlayers();
 	private final static String TAG = Play.class.getSimpleName();
 	private static int playerID = 0;
 	int todo = 2; //Leikmaður sem á að gera.
-	int rein = Game.getReinforcements(players.get(0));
+	int rein = game.getReinforcements(players.get(0));
 	int init = 1;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.play);
+//	    setContentView(R.layout.play);
     	txt_log = (TextView) findViewById(R.id.txt_log);
     	edi_info = (EditText) findViewById(R.id.edi_info);
 	    playerID = FileHandler.readPlayerId(this);
@@ -40,14 +41,17 @@ public class Play extends Activity {
 	    try {
 	    	String data[] = gs.split(":");
 	    	Log.d(TAG,"GameID: "+data[0]);
-	    	Game.setGameID(Integer.parseInt(data[0]));
+	    	game.setGameID(Integer.parseInt(data[0]));
 	    } catch (Exception e) {
 	    	Log.d(TAG,e.getMessage());
 	    }
 	    
-    	if (todo == playerID ){
-    		goOn();
-    	}
+	    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    setContentView(new GMapView(this,getWindowManager(),game));
+	    
+//    	if (todo == playerID ){
+//    		goOn();
+//    	}
 	    // TODO Auto-generated method stub
 	}
 	
@@ -103,7 +107,7 @@ public class Play extends Activity {
     	PrintCountries();
     	Log.d(TAG,"Countries printed");
     	VictoryChecker v = new VictoryChecker();
-    	if (v.check(Game) == 1) {
+    	if (v.check(game) == 1) {
     		txt_log.setText(players.get(todo).getName() + " wins!");
     	}
     	else if (init ==1) {
@@ -140,13 +144,13 @@ public class Play extends Activity {
     		    */
     		    Log.d(TAG,"Almost there");
     		    Gamestate g = new Gamestate();
-    		    String new_gamestate = g.getGamestate(Game, todo);
+    		    String new_gamestate = g.getGamestate(game, todo);
     		    Log.d(TAG,"This is the place to be!");
     		    new sendGamestateTask().execute(new_gamestate);
     		}
     		else {
         		String[] att = txt.split(",");
-    			Game.Attack(is.hi.lucky7.Game.getCountries().get(Integer.parseInt(att[0])),is.hi.lucky7.Game.getCountries().get(Integer.parseInt(att[1])));
+    			game.Attack(is.hi.lucky7.Game.getCountries().get(Integer.parseInt(att[0])),is.hi.lucky7.Game.getCountries().get(Integer.parseInt(att[1])));
     		}
     	}
 

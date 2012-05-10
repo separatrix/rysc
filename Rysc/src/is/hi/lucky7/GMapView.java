@@ -24,12 +24,16 @@ public class GMapView extends View {
 	private TextView t_one;
 	
 	private Paint labelPaint;
-	private float labelL;
-	private float labelR;
-	private float labelT;
-	private float labelB;
-	private float labelTextX;
-	private float labelTextY;
+	private float labelTextX = 650;
+	private float labelTextY = 50;
+	
+	private Paint buttonPaint;
+	private float buttonL = 30;
+	private float buttonR = 240;
+	private float buttonT = 630;
+	private float buttonB = 760;
+	private float buttonTextX = buttonL+((buttonR-buttonL)/2);
+	private float buttonTextY = buttonT+((buttonB-buttonT)/2)+10;
 	
 	private int countryCoords[] = {	1120,690,	// E Aus
 									1110,590,	// New Zealand.
@@ -77,7 +81,7 @@ public class GMapView extends View {
 	
 	private Game game;
 	
-	private int phase = 1; // 0 = Not your turn, 1 = Reinforce, 2 = Attack
+	private int phase = 1; // 0 = Not your turn, 1 = Reinforce, 2 = Source, 3 = Destination
 	
 	float scaleH;
 	float scaleW;
@@ -87,7 +91,7 @@ public class GMapView extends View {
 	
 	public GMapView(Context context, WindowManager _wm, Game g) {
 		super(context);
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.map1);
+		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.map2);
 		wm = _wm;
 		game = g;
 		
@@ -108,13 +112,21 @@ public class GMapView extends View {
 		paintB.setAlpha(150);
 		
 		labelPaint = new Paint();
+		labelPaint.setTextSize(40f);
 		labelPaint.setAntiAlias(true);
+		labelPaint.setFakeBoldText(true);
 		labelPaint.setStyle(Paint.Style.FILL);
-		labelPaint.setColor(Color.BLACK);
-		labelPaint.setAlpha(200);
+		labelPaint.setTextAlign(Paint.Align.CENTER);
+		labelPaint.setColor(Color.WHITE);
+		
+		buttonPaint = new Paint();
+		buttonPaint.setAntiAlias(true);
+		buttonPaint.setStyle(Paint.Style.FILL);
+		buttonPaint.setColor(Color.BLACK);
+		buttonPaint.setAlpha(255);
 	}
 	
-	protected void onDraw(Canvas canvas) {		
+	protected void onDraw(Canvas canvas) {
 		scaleH = (float)(canvas.getHeight()-25)/bmp.getHeight();
 		scaleW = (float)canvas.getWidth()/bmp.getWidth();
 		
@@ -153,19 +165,21 @@ public class GMapView extends View {
 			case 0:
 				break;
 			case 1:
-				canvas.drawRect(labelL, labelT, labelR, labelB, labelPaint);
-				canvas.drawText("Place "+game.getReinforcements(game.getPlayers().get(0))+" Reinforcements", labelTextX, labelTextY, paint);
+				canvas.drawText("Place "+game.getReinforcements(game.getPlayers().get(0))+" Reinforcements", labelTextX, labelTextY, labelPaint);
 				break;
 			case 2:
-				canvas.drawRect(labelL, labelT, labelR, labelB, labelPaint);
-				canvas.drawText("Choose Attacking Country", labelTextX, labelTextY, paint);
+				canvas.drawText("Choose Attacking Country", labelTextX, labelTextY, labelPaint);
 				break;
 			case 3:
-				canvas.drawRect(labelL, labelT, labelR, labelB, labelPaint);
-				canvas.drawText("Choose Country to Attack", labelTextX, labelTextY, paint);
+				canvas.drawText("Choose Country to Attack", labelTextX, labelTextY, labelPaint);
 				break;
 			default:
 				break;
+		}
+		
+		if (phase > 1) {
+			canvas.drawRect(buttonL, buttonT, buttonR, buttonB, buttonPaint);
+			canvas.drawText("End Turn", buttonTextX, buttonTextY, paint);
 		}
 	}
 	
@@ -181,6 +195,15 @@ public class GMapView extends View {
 			if (Math.abs((event.getX()/scaleW)-countryCoords[i]) < 35 && Math.abs((event.getY()/scaleH)-countryCoords[i+1]) < 25) {		
 				selected = i/2;
 				break;
+			}
+		}
+		
+		if (selected == -1) {
+			if ((event.getX()/scaleW)>buttonL && (event.getX()/scaleW)<buttonR && (event.getY()/scaleH)>buttonT && (event.getY()/scaleH)<buttonB) {
+				phase = 0;
+				Log.d("action","end turn");
+				this.invalidate();
+				return true;
 			}
 		}
 		
@@ -211,7 +234,6 @@ public class GMapView extends View {
 				if (game.getCountries().get(selected).getOwner().getId() == 1) {
 					break;
 				}
-//				if (game.getCountries().get(selected).)
 				defID = selected;
 				game.Attack(game.getCountries().get(attID), game.getCountries().get(defID));
 				phase--;

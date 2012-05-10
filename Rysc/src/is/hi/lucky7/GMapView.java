@@ -22,49 +22,14 @@ public class GMapView extends View {
 	private Paint paint;
 	private Paint paintB;
 	private TextView t_one;
-//	private int countryCoords[] = {	75,113,		// Alaska
-//									185,115,	// No. Canada
-//									425,95,		// Greenland
-//									180,190,	// SW Canada
-//									260,210,	// S Canada
-//									350,200,	// E Canada
-//									180,290,	// W Usa
-//									280,320,	// E Usa
-//									185,380,	// Mexico
-//									280,480,	// Colombia
-//									385,580,	// Brazil
-//									310,590,	// Peru
-//									320,680,	// Chile
-//									540,150,	// Iceland
-//									630,160,	// Norway
-//									510,260,	// UK
-//									630,285,	// Baltic
-//									730,220,	// W Russia
-//									530,400,	// Spain
-//									630,370,	// Italy
-//									570,540,	// W Africa
-//									670,490,	// Egypt
-//									720,560,	// Horn
-//									670,630,	// C Africa
-//									670,740,	// S Africa
-//									780,740,	// Madagascar
-//									760,440,	// M East
-//									840,320,	// Kazakh
-//									900,440,	// India
-//									980,380,	// China
-//									870,220,	// C Russia
-//									930,150,	// N Russia
-//									990,480,	// Thailand
-//									1010,300,	// Korea
-//									1000,230,	// SE Russia
-//									1030,110,	// NE Russia
-//									1110,120,	// E Russia
-//									1130,310,	// Japan
-//									1010,620,	// Phillipines
-//									1110,590,	// New Zealand
-//									1120,690,	// E Aus
-//									1040,720,	// W Aus
-//									};
+	
+	private Paint labelPaint;
+	private float labelL;
+	private float labelR;
+	private float labelT;
+	private float labelB;
+	private float labelTextX;
+	private float labelTextY;
 	
 	private int countryCoords[] = {	1120,690,	// E Aus
 									1110,590,	// New Zealand.
@@ -140,7 +105,13 @@ public class GMapView extends View {
 		paintB.setAntiAlias(true);
 		paintB.setStyle(Paint.Style.FILL);
 		paintB.setColor(Color.BLACK);
-		paintB.setAlpha(200);
+		paintB.setAlpha(150);
+		
+		labelPaint = new Paint();
+		labelPaint.setAntiAlias(true);
+		labelPaint.setStyle(Paint.Style.FILL);
+		labelPaint.setColor(Color.BLACK);
+		labelPaint.setAlpha(200);
 	}
 	
 	protected void onDraw(Canvas canvas) {		
@@ -177,6 +148,25 @@ public class GMapView extends View {
 			canvas.drawCircle(countryCoords[i]+2, countryCoords[i+1]-8, 35, paintB);
 			canvas.drawText(armies,countryCoords[i],countryCoords[i+1],paint);
 		}
+		
+		switch(phase) {
+			case 0:
+				break;
+			case 1:
+				canvas.drawRect(labelL, labelT, labelR, labelB, labelPaint);
+				canvas.drawText("Place "+game.getReinforcements(game.getPlayers().get(0))+" Reinforcements", labelTextX, labelTextY, paint);
+				break;
+			case 2:
+				canvas.drawRect(labelL, labelT, labelR, labelB, labelPaint);
+				canvas.drawText("Choose Attacking Country", labelTextX, labelTextY, paint);
+				break;
+			case 3:
+				canvas.drawRect(labelL, labelT, labelR, labelB, labelPaint);
+				canvas.drawText("Choose Country to Attack", labelTextX, labelTextY, paint);
+				break;
+			default:
+				break;
+		}
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
@@ -185,14 +175,19 @@ public class GMapView extends View {
 		}
 		Log.d("action", ""+event.getAction());
 		
-		int selected = 0;
+		int selected = -1;
 		
 		for(int i=0; i<countryCoords.length; i +=2) {
 			if (Math.abs((event.getX()/scaleW)-countryCoords[i]) < 35 && Math.abs((event.getY()/scaleH)-countryCoords[i+1]) < 25) {		
 				selected = i/2;
 				break;
 			}
-		}		
+		}
+		
+		if (selected == -1) {
+			Log.d("selected", "none");
+			return true;
+		}
 		
 		switch (phase) {
 			case 0:
@@ -202,7 +197,7 @@ public class GMapView extends View {
 					break;
 				}
 				int rein = game.getReinforcements(game.getPlayers().get(0));
-				Log.d("Rein",""+rein);
+				Log.d("Reinforce",""+rein);
 				game.getCountries().get(selected).setArmies(game.getCountries().get(0).getArmies()+rein);
 				phase++;
 			case 2:
@@ -219,7 +214,7 @@ public class GMapView extends View {
 //				if (game.getCountries().get(selected).)
 				defID = selected;
 				game.Attack(game.getCountries().get(attID), game.getCountries().get(defID));
-				phase = 3;
+				phase--;
 				break;
 			default:
 				phase = 0;

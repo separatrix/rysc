@@ -35,48 +35,48 @@ public class GMapView extends View {
 	private float buttonTextX = buttonL+((buttonR-buttonL)/2);
 	private float buttonTextY = buttonT+((buttonB-buttonT)/2)+10;
 	
-	private int countryCoords[] = {	1120,690,	// E Aus
-									1110,590,	// New Zealand.
-									1040,720,	// W Aus
-									1010,620,	// Phillipines
-									320,680,	// Chile
-									385,580,	// Brazil
-									310,590,	// Peru
-									280,480,	// Colombia
-									670,740,	// S Africa
-									670,630,	// C Africa
-									720,560,	// Horn
-									780,740,	// Madagascar
-									570,540,	// W Africa
-									670,490,	// Egypt
-									185,380,	// Mexico
-									180,290,	// W Usa
-									280,320,	// E Usa
-									180,190,	// SW Canada
-									260,210,	// S Canada
-									350,200,	// E Canada
-									75,113,		// Alaska
-									185,115,	// No. Canada
-									425,95,		// Greenland
-									540,150,	// Iceland
-									630,160,	// Norway
-									510,260,	// UK
-									530,400,	// Spain
-									630,285,	// Baltic
-									630,370,	// Italy
-									730,220,	// W Russia
-									760,440,	// M East
-									900,440,	// India
-									990,480,	// Thailand 
-									840,320,	// Kazakh
-									980,380,	// China
-									870,220,	// C Russia
-									930,150,	// N Russia
-									1010,300,	// Korea
-									1130,310,	// Japan
-									1000,230,	// SE Russia
-									1110,120,	// E Russia
-									1030,110,	// NE Russia
+	private int countryCoords[] = {	1070,650,	// E Aus
+									1140,710,	// New Zealand.
+									980,640,	// W Aus
+									1020,520,	// Phillipines
+									360,680,	// Chile
+									400,580,	// Brazil
+									320,570,	// Peru
+									360,490,	// Colombia
+									660,620,	// S Africa
+									640,530,	// C Africa
+									700,500,	// Horn
+									740,600,	// Madagascar
+									580,460,	// W Africa
+									650,420,	// Egypt
+									220,420,	// Mexico
+									210,340,	// W Usa
+									280,350,	// E Usa
+									210,250,	// SW Canada
+									280,260,	// S Canada
+									350,270,	// E Canada
+									140,150,	// Alaska
+									250,150,	// No. Canada
+									455,115,	// Greenland
+									530,220,	// Iceland
+									630,210,	// Norway
+									565,285,	// UK
+									560,350,	// Spain
+									610,295,	// Baltic
+									630,340,	// Italy
+									700,260,	// W Russia
+									720,400,	// M East
+									840,420,	// India
+									930,460,	// Thailand 
+									780,320,	// Kazakh
+									900,360,	// China
+									800,240,	// C Russia
+									850,170,	// N Russia
+									910,300,	// Korea
+									1030,340,	// Japan
+									910,220,	// SE Russia
+									1030,170,	// E Russia
+									940,120,	// NE Russia
 	};
 	
 	private Game game;
@@ -86,19 +86,27 @@ public class GMapView extends View {
 	float scaleH;
 	float scaleW;
 	
+	float shiftH;
+	float shiftW;
+	
+	float iniX;
+	float iniY;
+	
+	boolean panning;
+	
 	int attID;
 	int defID;
 	
 	public GMapView(Context context, WindowManager _wm, Game g) {
 		super(context);
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.map2);
+		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.map1);
 		wm = _wm;
 		game = g;
 		
 		t_one = new TextView(context);
 		
 		paint = new Paint();
-		paint.setTextSize(32f);
+		paint.setTextSize(28f);
 		paint.setAntiAlias(true);
 		paint.setFakeBoldText(true);
 		paint.setStyle(Paint.Style.FILL);
@@ -124,14 +132,23 @@ public class GMapView extends View {
 		buttonPaint.setStyle(Paint.Style.FILL);
 		buttonPaint.setColor(Color.BLACK);
 		buttonPaint.setAlpha(255);
+		
+		shiftH = 0;
+		shiftW = 0;
+		
+		iniX = 0;
+		iniY = 0;
+		
+		panning = false;
 	}
 	
 	protected void onDraw(Canvas canvas) {
-		scaleH = (float)(canvas.getHeight()-25)/bmp.getHeight();
-		scaleW = (float)canvas.getWidth()/bmp.getWidth();
+		scaleH = 2*(float)(canvas.getHeight()-25)/bmp.getHeight();
+		scaleW = 2*(float)canvas.getWidth()/bmp.getWidth();
 		
 		canvas.drawColor(Color.BLACK);
 		canvas.scale(scaleW,scaleH);
+		canvas.translate(shiftW,shiftH);
 		canvas.drawBitmap(bmp,0,0,null);
 		
 		String armies = "0";
@@ -157,49 +174,69 @@ public class GMapView extends View {
 			
 			armies = "" + game.getCountries().get(i/2).getArmies();
 			
-			canvas.drawCircle(countryCoords[i]+2, countryCoords[i+1]-8, 35, paintB);
+			canvas.drawCircle(countryCoords[i]+2, countryCoords[i+1]-8, 20, paintB);
 			canvas.drawText(armies,countryCoords[i],countryCoords[i+1],paint);
 		}
+		
+		canvas.scale((float)0.5,(float)0.5);
 		
 		switch(phase) {
 			case 0:
 				break;
 			case 1:
-				canvas.drawText("Place "+game.getReinforcements(game.getPlayers().get(0))+" Reinforcements", labelTextX, labelTextY, labelPaint);
+				canvas.drawText("Place "+game.getReinforcements(game.getPlayers().get(0))+" Reinforcements", labelTextX-2*shiftW, labelTextY-2*shiftH, labelPaint);
 				break;
 			case 2:
-				canvas.drawText("Choose Attacking Country", labelTextX, labelTextY, labelPaint);
+				canvas.drawText("Choose Attacking Country", labelTextX-2*shiftW, labelTextY-2*shiftH, labelPaint);
 				break;
 			case 3:
-				canvas.drawText("Choose Country to Attack", labelTextX, labelTextY, labelPaint);
+				canvas.drawText("Choose Country to Attack", labelTextX-2*shiftW, labelTextY-2*shiftH, labelPaint);
 				break;
 			default:
 				break;
 		}
 		
 		if (phase > 1) {
-			canvas.drawRect(buttonL, buttonT, buttonR, buttonB, buttonPaint);
-			canvas.drawText("End Turn", buttonTextX, buttonTextY, paint);
+			canvas.drawRect(buttonL-2*shiftW, buttonT-2*shiftH, buttonR-2*shiftW, buttonB-2*shiftH, buttonPaint);
+			canvas.drawText("End Turn", buttonTextX-2*shiftW, buttonTextY-2*shiftH, paint);
 		}
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
 		if (event.getAction() != MotionEvent.ACTION_UP) {
+			if(!panning) {
+				panning = true;
+				iniX = event.getX();
+				iniY = event.getY();
+			}
+			else {
+				shiftW = shiftW+event.getX()-iniX;
+				iniX = event.getX();
+				shiftH = shiftH+event.getY()-iniY;
+				iniY = event.getY();
+				if(shiftW>0) shiftW = 0;
+				if(shiftH>0) shiftH = 0;
+				if(shiftW<-600) shiftW = -600;
+				if(shiftH<-414) shiftH = -414;
+			}
+			this.invalidate();
 			return true;
 		}
 		Log.d("action", ""+event.getAction());
 		
 		int selected = -1;
 		
+		panning = false;
+		
 		for(int i=0; i<countryCoords.length; i +=2) {
-			if (Math.abs((event.getX()/scaleW)-countryCoords[i]) < 35 && Math.abs((event.getY()/scaleH)-countryCoords[i+1]) < 25) {		
+			if (Math.abs((event.getX()/scaleW)-countryCoords[i]-shiftW) < 35 && Math.abs((event.getY()/scaleH)-countryCoords[i+1]-shiftH) < 25) {		
 				selected = i/2;
 				break;
 			}
 		}
 		
 		if (selected == -1) {
-			if ((event.getX()/scaleW)>buttonL && (event.getX()/scaleW)<buttonR && (event.getY()/scaleH)>buttonT && (event.getY()/scaleH)<buttonB) {
+			if ((event.getX()/scaleW)-shiftW>buttonL && (event.getX()/scaleW)-shiftW<buttonR && (event.getY()/scaleH)-shiftH>buttonT && (event.getY()/scaleH)-shiftH<buttonB) {
 				phase = 0;
 				Log.d("action","end turn");
 				this.invalidate();
@@ -209,6 +246,7 @@ public class GMapView extends View {
 		
 		if (selected == -1) {
 			Log.d("selected", "none");
+			this.invalidate();
 			return true;
 		}
 		
